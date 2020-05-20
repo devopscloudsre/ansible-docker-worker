@@ -1,0 +1,14 @@
+---
+- name: "Play 1- Install Apache"
+  hosts: apache
+  become: yes
+  tasks:
+    - name: install the latest version of Apache
+      yum:
+        name: httpd
+        state: present
+
+    - name: service start
+      service:
+        name: httpd
+        state: started

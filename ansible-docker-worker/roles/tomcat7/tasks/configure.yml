@@ -1,0 +1,4 @@
+- name: "Copy tomcat-user.xml Configuration file"
+  copy: src=files/tomcat-users.xml dest=/usr/share/tomcat7/conf/tomcat-users.xml
+  notify:
+  - restart tomcat7

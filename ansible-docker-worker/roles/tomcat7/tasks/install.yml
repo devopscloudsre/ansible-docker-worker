@@ -1,0 +1,6 @@
+- name: "Install Tomcat7"
+  yum: name=tomcat7 state=present
+- name: "Install Tomcat7-webapps"
+  yum: name=tomcat7-webapps state=present
+- name: "Install Tomcat7-admin-webapps"
+  yum: name=tomcat7-admin-webapps state=present

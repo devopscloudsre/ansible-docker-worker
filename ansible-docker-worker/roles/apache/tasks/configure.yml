@@ -1,0 +1,10 @@
+- name: Copy httpd.conf
+  copy:
+    src:  files/httpd.conf-ansible
+    dest: /etc/httpd/conf/httpd.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+  notify:
+  - reload apache

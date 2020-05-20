@@ -1,0 +1,19 @@
+---
+- name: "play 1- apache installation for snapdeal"
+  hosts: snapdeal-apache
+  become: yes
+  roles:
+   - apache
+
+- name: "play 2- copy code for snapdeal"
+  hosts: snapdeal-apache
+  become: yes
+  tasks:
+    - name: Copy Index.html to Doc Root
+      copy:
+        src: snapdeal/index.html-ansible
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
+

@@ -1,0 +1,14 @@
+---
+- name: Play for Declaring variable, passing variable input from prompt and DEBUG
+  hosts: localhost
+  vars:
+   http_port: 8087
+   username: rahul
+
+  vars_prompt:
+    - name: "dbpass"
+      prompt: "Enter password for database"
+
+  tasks:
+   - debug: msg=" DB password is {{dbpass}} {{username}} {{http_port}}"
+

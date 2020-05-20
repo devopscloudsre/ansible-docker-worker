@@ -1,0 +1,17 @@
+---
+- name: play1
+  hosts: apache
+  become: yes
+  tasks:
+    - name: install the latest version of Apache and MariaDB
+      package:
+        name:
+          - httpd
+          - mysql
+        state: latest
+        
+    - name: Start service httpd, if not started
+      service:
+        state: started
+        name: httpd
+

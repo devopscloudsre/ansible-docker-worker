@@ -1,0 +1,15 @@
+- name: "play 3- copy war file to flipkart tomcat7 server"
+  hosts: flipkart-tomcat
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python
+  tasks:
+    - name: Install boto3 and botocore with pip2 module
+      pip:
+       name:
+        - boto3
+        - botocore
+       executable: pip-2.7
+      tags:
+        - python-packages
+

@@ -1,0 +1,41 @@
+---
+- name: "play 1- configure apache for flipkart"
+  hosts: flipkart-apache
+  become: yes
+  roles:
+   - apache
+
+- name: "play 2- configure tomcat for flipkart"
+  hosts: flipkart-tomcat
+  become: yes
+  roles:
+   - tomcat7
+
+- name: "play 3- copy war file to flipkart tomcat7 server"
+  hosts: flipkart-tomcat
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python
+  tasks:
+    - name: Install boto3 and botocore with pip2 module
+      pip:
+       name:
+         - boto3
+         - botocore
+       executable: pip-2.7
+      tags:
+         - python-packages
+
+    - name: Copy war file to tomcat7
+      aws_s3:
+        bucket: flipkart-1030-weekend
+        object: SampleWebApp123.war
+        dest: /usr/share/tomcat7/webapps/SampleWebApp123.war
+        mode: get
+
+- name: 'Play 4- configure Apache and Tomcat'
+  become: yes
+  hosts: flipkart-apache
+  tasks:
+    - name: "Copy proxy file at Apache Server"
+      copy: src=/etc/ansible/flipkart/proxy.conf dest=/etc/httpd/conf.d/proxy.conf

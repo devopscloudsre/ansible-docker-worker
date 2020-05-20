@@ -1,0 +1,17 @@
+---
+- name: This is a Play
+  hosts: tomcat
+  remote_user: ansi
+  become: yes
+  gather_facts: no
+#  vars:
+#    state: present
+  vars_prompt:
+    - name: "state"
+      prompt: "Enter your desired state" 
+  tasks:
+    - name: Install Apache
+      yum: name={{ item }} state={{ state }}
+      with_items:
+        - httpd
+        - php

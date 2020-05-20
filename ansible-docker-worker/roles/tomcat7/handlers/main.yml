@@ -1,0 +1,5 @@
+---
+# handlers file for /etc/ansible/roles/tomcat7
+- name: restart tomcat7
+  service: name=tomcat7 state=restarted
+
